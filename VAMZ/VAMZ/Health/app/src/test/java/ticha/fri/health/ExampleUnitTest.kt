@@ -1,4 +1,4 @@
-package com.example.lietajte_s_nami
+package ticha.fri.health
 
 import org.junit.Test
 
