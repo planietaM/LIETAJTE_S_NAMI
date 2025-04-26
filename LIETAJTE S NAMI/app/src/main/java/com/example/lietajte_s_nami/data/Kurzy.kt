@@ -27,13 +27,13 @@ object DataSource {
             typKurzu = "Pokročilý kurz"
         ),
         Kurz(
-            nazovKurzu = "Tandemový let s inštruktorom – Straník (Žilina)",
+            nazovKurzu = "Termicky kurz paraglidingu – Straník (Žilina)",
             cenaKurzu = 89.99,
             miestoKonaniaPSC = "010 01",
             miestoKonania = "Žilina – Straník",
             datumZaciatok = LocalDate.of(2025, 5, 1),
             datumKoniec = LocalDate.of(2025, 9, 30),
-            typKurzu = "Tandemový zážitok"
+            typKurzu = "Termicky kurz"
         )
 
     )

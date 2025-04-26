@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LIETAJTE_S_NAMI</string>
+    <string name="nadpis_domovska_obrazovka">Lietajte s nami</string>
+    <string name="podnadpis_domovska_obrazovka">ÚVOD</string>
+    <string name="tlacidloKurzy">Kurzy</string>
+    <string name="tlacidloBezpecnostnaKontrola">Bezpečnostná kontrola</string>
+    <string name="slogan_domovska_obrazovka">"Lietajte bezpečnejšie, lietajte s nami"</string>
+    <string name="text_domovska_obrazovka">Keď sa písal rok 2022 a ja som sa prihlásil na môj paraglidingový kurz, tak bolo ťažké nájsť tie správne informácie a vďaka tejto aplikácii ich nájdete na jednom mieste.</string>
 </resources>

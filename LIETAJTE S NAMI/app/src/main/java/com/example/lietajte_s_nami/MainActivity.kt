@@ -1,6 +1,33 @@
 package com.example.lietajte_s_nami
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
+import com.example.lietajte_s_nami.navigation.AppNavigator
+
+import com.example.lietajte_s_nami.ui.theme.LIETAJTE_S_NAMITheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            LIETAJTE_S_NAMITheme {
+                Scaffold(modifier = Modifier) {
+                    AppNavigator()
+                }
+            }
+        }
+    }
+}
+
+/*
+package com.example.lietajte_s_nami
+
+import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -152,4 +179,4 @@ fun CustomButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifie
 
         Text(text = text, fontSize = 18.sp, color = Color.Black , fontWeight = FontWeight.Bold )
     }
-}
+}*/
