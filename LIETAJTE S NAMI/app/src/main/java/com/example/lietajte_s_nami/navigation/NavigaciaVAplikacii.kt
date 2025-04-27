@@ -6,14 +6,22 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-
+import com.example.lietajte_s_nami.screens.BezpecnostnaKontrolaPackage.BezpecnostnaKontrola
 import com.example.lietajte_s_nami.screens.DomovskaObrazovkaPackage.DomovskaObrazovka
-
+import com.example.lietajte_s_nami.screens.DostupneKurzyPackage.DostupneKurzy
+import com.example.lietajte_s_nami.screens.DostupneKurzyPackage.DetailKurzuScreen
 
 @Composable
 fun AppNavigator(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") { DomovskaObrazovka(navController) }
+        composable("security") { BezpecnostnaKontrola(navController) }
+        composable("courses") { DostupneKurzy(navController) }
 
+
+        composable("kurzDetail/{kurzId}") { backStackEntry ->
+            val kurzId = backStackEntry.arguments?.getString("kurzId")
+            DetailKurzuScreen(kurzId = kurzId)
+        }
     }
 }
