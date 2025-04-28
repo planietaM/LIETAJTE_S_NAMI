@@ -20,7 +20,7 @@ fun AppNavigator(navController: NavHostController = rememberNavController()) {
 
 
         composable("kurzDetail/{kurzId}") { backStackEntry ->
-            val kurzId = backStackEntry.arguments?.getString("kurzId")
+            val kurzId = backStackEntry.arguments?.getString("kurzId")?.toIntOrNull() ?: -1
             DetailKurzuScreen(kurzId = kurzId)
         }
     }

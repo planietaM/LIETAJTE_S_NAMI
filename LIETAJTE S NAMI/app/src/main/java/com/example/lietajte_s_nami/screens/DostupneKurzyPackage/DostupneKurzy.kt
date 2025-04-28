@@ -20,7 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -32,75 +35,34 @@ import com.example.lietajte_s_nami.data.Kurz
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DostupneKurzy(navController: NavController) {
-
-    // Načítame zoznam kurzov z DataSource
     val kurzy = DataSource.kurzy
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
 
-        Text(
-            text = stringResource(id = R.string.DostupneKurzy),
-            fontSize = 40.sp,
-            color = Color.Black,
-            modifier = Modifier.fillMaxWidth().padding(bottom = 0.dp).background(Color(0xFF1BB2C7))
+        GreetingText(
+            stringResource(id = R.string.DostupneKurzy),
+            40,
+            bezPozadia = true,
+            normalnyStylPisma = false,
+            hrubePismo = true,
+            rgbTextu = 0xFF1BB2C7
         )
+
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(kurzy) { kurz ->
-                /*
+
                 KurzCard(
                     kurz = kurz,
-                    modifier = Modifier.fillMaxWidth()
-                        .height(140.dp).clickable { navController.navigate("kurzDetail/${kurz.id}")}
-
-                        )
-
-                 */
-                KurzCard(
-                    kurz = kurz,
-                    onClick = { navController.navigate("kurzDetail/${kurz}") },
+                    onClick = { navController.navigate("kurzDetail/${kurz.id}") },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
         }
     }
 }
-/*
-@Composable
-fun KurzCard(kurz: Kurz, modifier: Modifier = Modifier) {
-    Card(
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFAED581)),
-        modifier = modifier
-    ) {
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = kurz.nazovKurzu,
-                    style = MaterialTheme.typography.titleLarge,
-                )
-                Spacer(Modifier.weight(3f))
-                Text(
-                    text = "Cena: ${kurz.cenaKurzu} €",
-                    style = MaterialTheme.typography.titleMedium
-                )
-            }
-            Text(
-                text = "Typ: ${kurz.typKurzu}",
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
-    }
-}*/
 
 
 //kod som skopiroval a prerobil s webu : https://www.boltuix.com/2021/12/card_25.html
@@ -169,3 +131,44 @@ fun KurzCard(kurz: Kurz, onClick: () -> Unit, modifier: Modifier = Modifier) {
         }
     }
 }
+
+@Composable
+fun GreetingText(name: String, velkost: Int, bezPozadia: Boolean = true ,rgbTextu: Long = 0xFF000000,hrubePismo: Boolean = false,normalnyStylPisma: Boolean = true ,modifier: Modifier = Modifier ) {
+    val pozadie: Color
+    if(bezPozadia) {
+        pozadie = Color.Transparent
+    } else {
+        pozadie = Color.White
+    }
+    val stylPisma: FontFamily
+    if(normalnyStylPisma) {
+        stylPisma = FontFamily.Default
+
+    } else {
+        stylPisma = FontFamily(Font(R.font.inkfree))
+    }
+    val fontWeight: FontWeight
+    if(hrubePismo) {
+        fontWeight = FontWeight.Bold
+    } else {
+        fontWeight = FontWeight.Normal
+    }
+    Text(
+        text = name,
+        modifier = modifier.
+        fillMaxWidth().
+            //padding((velkost/3).dp).
+        background(pozadie).
+        padding(10.dp),
+        fontSize = velkost.sp,
+        lineHeight = velkost.sp,
+        textAlign = TextAlign.Center,
+        //softWrap = true,
+        color =  Color(rgbTextu),
+        fontFamily = stylPisma,
+        fontWeight = fontWeight,
+
+        )
+}
+
+

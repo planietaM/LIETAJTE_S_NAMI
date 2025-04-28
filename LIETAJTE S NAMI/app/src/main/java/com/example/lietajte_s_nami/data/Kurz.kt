@@ -13,5 +13,7 @@ data class Kurz(
     val typKurzu: String,
     val mail: String,
     val telefon: String,
-    val popisKurzu: String,
+    val popisKurzu1: String,
+    val popisKurzu2: String,
+    val popisKurzu3: String,
 )
