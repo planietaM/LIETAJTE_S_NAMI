@@ -37,7 +37,7 @@ import com.example.lietajte_s_nami.data.Kurz
 fun DostupneKurzy(navController: NavController) {
     val kurzy = DataSource.kurzy
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+    Column(modifier = Modifier.fillMaxSize().background(Color.White).padding(16.dp).padding(top = 10.dp)) {
 
         GreetingText(
             stringResource(id = R.string.DostupneKurzy),

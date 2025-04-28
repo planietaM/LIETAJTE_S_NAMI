@@ -16,7 +16,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -24,9 +23,6 @@ import androidx.compose.ui.text.style.TextAlign
 import com.example.lietajte_s_nami.R
 import com.example.lietajte_s_nami.data.DataSource
 import com.example.lietajte_s_nami.screens.DomovskaObrazovkaPackage.GreetingText
-import java.time.LocalDate
-
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -38,12 +34,12 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.EuroSymbol
 import androidx.compose.material.icons.filled.Event
 import android.content.Context
+import android.content.Intent
 import android.location.Geocoder
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
@@ -62,6 +58,7 @@ fun DetailKurzuScreen(kurzId: Int) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.White)
             .padding(16.dp)
             .verticalScroll(scrollState),
         verticalArrangement = Arrangement.Top,
@@ -95,8 +92,8 @@ fun DetailKurzuScreen(kurzId: Int) {
 
         CourseScreen(kurz.miestoKonaniaPSC)
 
-        GreetingIkonaAndText( "Kontakt",25)
-        CustomButtonMail(kurz.mail , 20, { /*TODO*/ }, ikonka = Icons.Default.Email)
+        GreetingIkonaAndText( "Kontakt",25,)
+        CustomButtonMail(kurz.mail , 20, ikonka = Icons.Default.Email, idKurzu = kurz.id)
         CustomButtonTelephone(kurz.telefon , 20, { /*TODO*/ }, ikonka = Icons.Default.Phone)
 
         GreetingText(
@@ -195,9 +192,13 @@ fun GreetingIkonaAndText(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun CustomButtonMail(text: String,velkost: Int, onClick: () -> Unit, modifier: Modifier = Modifier ,  ikonka : ImageVector?  = null) {
-    Button(onClick = onClick,
+fun CustomButtonMail(text: String,velkost: Int, modifier: Modifier = Modifier ,  ikonka : ImageVector?  = null, idKurzu : Int) {
+    val context = LocalContext.current
+    Button(onClick = {
+        shareOrder(context , idKurzu)
+        },
         modifier = modifier.
         fillMaxWidth().
         height(80.dp).
@@ -211,7 +212,7 @@ fun CustomButtonMail(text: String,velkost: Int, onClick: () -> Unit, modifier: M
     }
 }
 @Composable
-fun CustomButtonTelephone(text: String,velkost: Int, onClick: () -> Unit, modifier: Modifier = Modifier ,  ikonka : ImageVector?  = null) {
+fun CustomButtonTelephone(text: String,velkost: Int, onClick: () -> Unit, modifier: Modifier = Modifier ,  ikonka : ImageVector?  = null ) {
     Button(onClick = onClick,
         modifier = modifier.
         fillMaxWidth().
@@ -220,7 +221,6 @@ fun CustomButtonTelephone(text: String,velkost: Int, onClick: () -> Unit, modifi
         shape = RectangleShape,
         border = BorderStroke(3.dp, Color.Black),
         colors = ButtonDefaults.buttonColors(Color.White)
-
     ) {
         GreetingIkonaAndText(text, velkost, ikonka = ikonka)
     }
@@ -281,4 +281,25 @@ suspend fun getCoordinatesFromPostalCode(context: Context, postalCode: String): 
             null
         }
     }
+}
+
+
+//podobny system pri cupcakoch zmenen len type inac same
+@RequiresApi(Build.VERSION_CODES.O)
+fun shareOrder(context: Context, kurzId: Int) {
+    val kurz = DataSource.kurzy.firstOrNull { it.id == kurzId } ?: return
+
+    val intent = Intent(Intent.ACTION_SENDTO).apply {
+        type = "message/rfc822"
+        putExtra(Intent.EXTRA_EMAIL, arrayOf(kurz.mail))
+        putExtra(Intent.EXTRA_SUBJECT, "Záujem o kurz: ${kurz.typKurzu}")
+        putExtra(Intent.EXTRA_TEXT, "Dotycny/na ma zaujem o kuz ktory sa uskutocni v datumoch od ${kurz.datumZaciatok} do ${kurz.datumKoniec} . Na prihlasenie na kurz prosim vyplnte vase Meno , Prizvisko pre viac info sa viete dovolat na tel. cisle ${kurz.telefon} .")
+    }
+
+    context.startActivity(
+        Intent.createChooser(
+            intent,
+            "Zdieľať kurz cez..."
+        )
+    )
 }
