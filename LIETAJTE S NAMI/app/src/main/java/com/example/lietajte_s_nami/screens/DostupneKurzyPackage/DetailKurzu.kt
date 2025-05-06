@@ -48,7 +48,6 @@ import kotlinx.coroutines.withContext
 import java.util.*
 import com.google.android.gms.maps.CameraUpdateFactory
 
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 
@@ -94,7 +93,7 @@ fun DetailKurzuScreen(kurzId: Int) {
 
         GreetingIkonaAndText( "Kontakt",25,)
         CustomButtonMail(kurz.mail , 20, ikonka = Icons.Default.Email, idKurzu = kurz.id)
-        CustomButtonTelephone(kurz.telefon , 20, { /*TODO*/ }, ikonka = Icons.Default.Phone)
+        CustomButtonTelephone(kurz.telefon , 20,  ikonka = Icons.Default.Phone)
 
         GreetingText(
             name = kurz.popisKurzu2,
@@ -212,8 +211,14 @@ fun CustomButtonMail(text: String,velkost: Int, modifier: Modifier = Modifier , 
     }
 }
 @Composable
-fun CustomButtonTelephone(text: String,velkost: Int, onClick: () -> Unit, modifier: Modifier = Modifier ,  ikonka : ImageVector?  = null ) {
-    Button(onClick = onClick,
+fun CustomButtonTelephone(text: String,velkost: Int, modifier: Modifier = Modifier ,  ikonka : ImageVector?  = null ) {
+    val context = LocalContext.current
+    Button(onClick = {
+        val intent = Intent(Intent.ACTION_DIAL).apply {
+            data = android.net.Uri.parse("tel:$text")
+        }
+        context.startActivity(intent)
+        },
         modifier = modifier.
         fillMaxWidth().
         height(80.dp).
