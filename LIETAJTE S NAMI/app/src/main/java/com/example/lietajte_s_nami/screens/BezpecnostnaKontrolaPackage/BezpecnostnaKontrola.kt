@@ -19,16 +19,7 @@ fun BezpecnostnaKontrola(navController: NavController) {
         modifier = Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Bezpečnostná kontrola", Modifier.padding(bottom = 16.dp))
-        Image(
-            painter = painterResource(id = R.drawable.stranik_uvod), // tvoje pozadie, alebo spravíš nové obrázky
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .clickable {
 
-                }
-        )
+
     }
 }

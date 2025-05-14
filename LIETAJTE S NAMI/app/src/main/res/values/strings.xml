@@ -9,6 +9,11 @@
 
     <string name="DostupneKurzy">Dostupne kurzy</string>
 
+    <string name="miesto_DK">Miesto kurzu: </string>
+    <string name="začiatok_DK">Začiatok: </string>
+    <string name="koniec_DK">Koniec: </string>">
+    <string name="cena_DK">Cena: </string>">
+    <string name="kontakt_DK">Kontakt</string>
 
 
 

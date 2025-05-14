@@ -26,7 +26,6 @@ import com.example.lietajte_s_nami.screens.DomovskaObrazovkaPackage.GreetingText
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.LocationOn
@@ -36,7 +35,6 @@ import androidx.compose.material.icons.filled.Event
 import android.content.Context
 import android.content.Intent
 import android.location.Geocoder
-
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
