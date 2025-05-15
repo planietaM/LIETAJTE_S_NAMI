@@ -21,7 +21,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.example.lietajte_s_nami.R
-import com.example.lietajte_s_nami.data.DataSource
+import com.example.lietajte_s_nami.data.Kurzy
 import com.example.lietajte_s_nami.screens.DomovskaObrazovkaPackage.GreetingText
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -50,7 +50,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 @Composable
 
 fun DetailKurzuScreen(kurzId: Int) {
-    val kurz = DataSource.kurzy.firstOrNull { it.id == kurzId } ?: return
+    val kurz = Kurzy.kurzy.firstOrNull { it.id == kurzId } ?: return
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -290,7 +290,7 @@ suspend fun getCoordinatesFromPostalCode(context: Context, postalCode: String): 
 //podobny system pri cupcakoch zmenen len type inac same
 @RequiresApi(Build.VERSION_CODES.O)
 fun shareOrder(context: Context, kurzId: Int) {
-    val kurz = DataSource.kurzy.firstOrNull { it.id == kurzId } ?: return
+    val kurz = Kurzy.kurzy.firstOrNull { it.id == kurzId } ?: return
 
     val intent = Intent(Intent.ACTION_SENDTO).apply {
         type = "message/rfc822"

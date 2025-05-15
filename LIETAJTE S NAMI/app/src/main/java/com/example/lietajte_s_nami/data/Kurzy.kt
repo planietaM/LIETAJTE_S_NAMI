@@ -4,7 +4,7 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
 
-object DataSource {
+object Kurzy {
 
     @RequiresApi(Build.VERSION_CODES.O)
     val kurzy = listOf(

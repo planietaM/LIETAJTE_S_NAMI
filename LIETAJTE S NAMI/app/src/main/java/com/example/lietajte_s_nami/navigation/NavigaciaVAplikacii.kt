@@ -1,5 +1,7 @@
 package com.example.lietajte_s_nami.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,6 +13,7 @@ import com.example.lietajte_s_nami.screens.DomovskaObrazovkaPackage.DomovskaObra
 import com.example.lietajte_s_nami.screens.DostupneKurzyPackage.DostupneKurzy
 import com.example.lietajte_s_nami.screens.DostupneKurzyPackage.DetailKurzuScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavigator(navController: NavHostController = rememberNavController()) {
     NavHost(navController = navController, startDestination = "home") {

@@ -26,14 +26,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.lietajte_s_nami.R
-import com.example.lietajte_s_nami.data.DataSource
+import com.example.lietajte_s_nami.data.Kurzy
 import com.example.lietajte_s_nami.data.Kurz
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DostupneKurzy(navController: NavController) {
-    val kurzy = DataSource.kurzy
+    val kurzy = Kurzy.kurzy
 
     Column(modifier = Modifier.fillMaxSize().background(Color.White).padding(16.dp).padding(top = 10.dp)) {
 
