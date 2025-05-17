@@ -1,4 +1,4 @@
-package com.example.lietajte_s_nami.data
+package com.example.lietajte_s_nami.data.UzNahraneData
 
 import java.time.LocalDate
 

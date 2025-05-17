@@ -1,4 +1,4 @@
-package com.example.lietajte_s_nami.screens.DomovskaObrazovkaPackage
+package com.example.lietajte_s_nami.ui.screens.DomovskaObrazovkaPackage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,6 +40,8 @@ fun DomovskaObrazovka(navController: NavController) {
             GreetingText(stringResource(id = R.string.podnadpis_domovska_obrazovka), 40 , hrubePismo = true)
             CustomButton(text = stringResource(id = R.string.tlacidloKurzy), onClick = {navController.navigate("courses")})
             CustomButton(text = stringResource(id = R.string.tlacidloBezpecnostnaKontrola), onClick = {navController.navigate("security")})
+            CustomButton(stringResource(id = R.string.pridajSaNaKurz), onClick = { navController.navigate("pridajSaNaSkolenie") })
+            CustomButton("Zobraziť osoby",onClick = { navController.navigate("vypis_osob") })
             GreetingImage()
             GreetingText(stringResource(id = R.string.slogan_domovska_obrazovka), 37, hrubePismo = true, rgbTextu = 0xFFFFFFFF)
             GreetingText(stringResource(id = R.string.text_domovska_obrazovka), 30 , )
@@ -87,7 +89,6 @@ fun GreetingText(name: String, velkost: Int, bezPozadia: Boolean = true ,rgbText
         text = name,
         modifier = modifier.
         fillMaxWidth().
-            //padding((velkost/3).dp).
         background(pozadie).
         padding(10.dp),
         fontSize = velkost.sp,

@@ -4,10 +4,11 @@
     <string name="podnadpis_domovska_obrazovka">ÚVOD</string>
     <string name="tlacidloKurzy">Kurzy</string>
     <string name="tlacidloBezpecnostnaKontrola">Bezpečnostná kontrola</string>
-    <string name="slogan_domovska_obrazovka">"Lietajte bezpečnejšie, lietajte s nami"</string>
+    <string name="slogan_domovska_obrazovka"> ""Lietajte bezpečnejšie, lietajte s nami""</string>
     <string name="text_domovska_obrazovka">Keď sa písal rok 2022 a ja som sa prihlásil na môj paraglidingový kurz, tak bolo ťažké nájsť tie správne informácie a vďaka tejto aplikácii ich nájdete na jednom mieste.</string>
 
     <string name="DostupneKurzy">Dostupne kurzy</string>
+    <string name="ViacInformacii">Viac informácií</string>
 
     <string name="miesto_DK">Miesto kurzu: </string>
     <string name="začiatok_DK">Začiatok: </string>
@@ -16,8 +17,30 @@
     <string name="kontakt_DK">Kontakt</string>
 
 
-    <string name="BezpecnostnaKontrola">Bezpečnostná kontrola</string>"
+
+    <string name="BezpecnostnaKontrola">Bezpečnostná kontrola zaujemcovia</string>"
+    <string name="UspecnaKontrola">Úspečne si absolvoval bezpečnostnú kontrole</string>
+    <string name="zopakujBezpKontorlu">Zopakuj si kontrolu</string>
+    <string name="pridajSaNaKurz"> Prihlas sa na Bezpecnostny kurz </string>
+    <string name="BOZPUvod"> Prejdi na domovskú stránku</string>
+    <string name="PridajSaBOZPKurz">Pridaj sa na bezpečnostný kurz</string>
 
 
+    <string name="DalsiaOtazkaBOZP">Ďalšia otázka</string>
+    <string name="Dokonci">Dokonči</string>
+    <string name="RozumiemBoyp"> Rozumiem tejto stranke </string>
+    <string name="SpatBozp"> Späť </string>
 
+
+    <string name="label_meno">Meno</string>
+    <string name="label_priezvisko">Priezvisko</string>
+    <string name="label_telefon">Telefón</string>
+    <string name="label_email">Email</string>
+    <string name="ulozit">Uložiť</string>
+    <string name="osoba_pridana">Osoba bola pridaná</string>
+
+    <string name="error_meno">Meno nesmie obsahovať čísla.</string>
+    <string name="error_priezvisko">Priezvisko nesmie obsahovať čísla.</string>
+    <string name="error_email">Email musí obsahovať @.</string>
+    <string name="error_telefon">Telefón musí obsahovať len číslice alebo znak +.</string>
 </resources>

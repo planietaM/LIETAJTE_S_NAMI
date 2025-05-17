@@ -1,4 +1,4 @@
-package com.example.lietajte_s_nami.screens.DostupneKurzyPackage
+package com.example.lietajte_s_nami.ui.screens.DostupneKurzyPackage
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
@@ -21,8 +21,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.example.lietajte_s_nami.R
-import com.example.lietajte_s_nami.data.Kurzy
-import com.example.lietajte_s_nami.screens.DomovskaObrazovkaPackage.GreetingText
+import com.example.lietajte_s_nami.data.UzNahraneData.Kurzy
+import com.example.lietajte_s_nami.ui.screens.DomovskaObrazovkaPackage.GreetingText
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -38,6 +38,7 @@ import android.location.Geocoder
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.*
@@ -61,7 +62,6 @@ fun DetailKurzuScreen(kurzId: Int) {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // 1) Nadpis
         GreetingText(
             name = kurz.nazovKurzu,
             velkost = 40,
@@ -71,7 +71,6 @@ fun DetailKurzuScreen(kurzId: Int) {
             rgbTextu = 0xFF1BB2C7,
         )
 
-        // 2) Popis kurzu – menší, tmavý text, biele pozadie
         GreetingText(
             name = kurz.popisKurzu1,
             velkost = 20,
@@ -82,14 +81,14 @@ fun DetailKurzuScreen(kurzId: Int) {
 
         Spacer(modifier = Modifier.height(5.dp))
 
-        GreetingIkonaAndText("Miesto kurzu: ${kurz.miestoKonania}" ,20, ikonka = Icons.Default.LocationOn)
-        GreetingIkonaAndText( "Začiatok: ${kurz.datumZaciatok}",20, ikonka = Icons.Default.Event)
-        GreetingIkonaAndText( "Koniec: ${kurz.datumKoniec}",20, ikonka = Icons.Default.Event)
-        GreetingIkonaAndText( "Cena: ${kurz.cenaKurzu}",20, ikonka = Icons.Default.EuroSymbol)
+        GreetingIkonaAndText( stringResource(id = R.string.miesto_DK) + " ${kurz.typKurzu}" ,20, ikonka = Icons.Default.LocationOn)
+        GreetingIkonaAndText( stringResource(id = R.string.začiatok_DK) + " ${kurz.datumZaciatok}",20, ikonka = Icons.Default.Event)
+        GreetingIkonaAndText( stringResource(id = R.string.koniec_DK) + " ${kurz.datumKoniec}",20, ikonka = Icons.Default.Event)
+        GreetingIkonaAndText( stringResource(id = R.string.cena_DK) + " ${kurz.cenaKurzu}",20, ikonka = Icons.Default.EuroSymbol)
 
         CourseScreen(kurz.miestoKonaniaPSC)
 
-        GreetingIkonaAndText( "Kontakt",25,)
+        GreetingIkonaAndText( stringResource(id = R.string.kontakt_DK) ,25,)
         CustomButtonMail(kurz.mail , 20, ikonka = Icons.Default.Email, idKurzu = kurz.id)
         CustomButtonTelephone(kurz.telefon , 20,  ikonka = Icons.Default.Phone)
 
@@ -108,6 +107,7 @@ fun DetailKurzuScreen(kurzId: Int) {
             normalnyStylPisma = true,
             hrubePismo = false,
         )
+        Spacer(modifier = Modifier.height(15.dp))
     }
 }
 
@@ -138,9 +138,9 @@ fun GreetingText(name: String, velkost: Int, bezPozadia: Boolean = true ,rgbText
         text = name,
         modifier = modifier.
         fillMaxWidth().
-            //padding((velkost/3).dp).
         background(pozadie).
-        padding(10.dp),
+        padding(vertical = 15.dp).
+        padding(horizontal = 10.dp),
         fontSize = velkost.sp,
         lineHeight = velkost.sp,
         textAlign = TextAlign.Center,

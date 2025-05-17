@@ -1,6 +1,7 @@
-package com.example.lietajte_s_nami.screens.BezpecnostnaKontrolaPackage
+package com.example.lietajte_s_nami.ui.screens.BezpecnostnaKontrolaPackage
 
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
@@ -32,67 +33,16 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import com.example.lietajte_s_nami.data.BezpecnostnaKontrolaData
-
-/*
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun BezpecnostnaKontrola(navController: NavController) {
-    var checkClicked: Boolean by remember { mutableStateOf(false) }
-    val prvky = BezpecnostnaKontrolaData.BezpecnostnaKontrolaData
-    var currentIndex by remember { mutableStateOf(0) }
-    val currentItem = prvky[currentIndex]
-    val context = LocalContext.current
-    val imageId = remember(currentItem.id) {
-        val resourceName = "bzpkontrola${currentItem.id}"
-        context.resources.getIdentifier(resourceName, "drawable", context.packageName)
-    }
-    val scrollState = rememberScrollState()
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(scrollState),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        GreetingText(
-            stringResource(id = R.string.BezpecnostnaKontrola), 40, bezPozadia = true, normalnyStylPisma = false, hrubePismo = true, rgbTextu = 0xFF1BB2C7
-        )
-
-        GreetingText(
-            currentItem.nadpisBezpecnostnehoOkna, 20, bezPozadia = true, hrubePismo = true,
-        )
-
-        if (imageId != 0) {
-            GreetingImage(painterResource(id = imageId))
-        }
+import com.example.lietajte_s_nami.data.UzNahraneData.BezpecnostnaKontrolaData
 
 
-        GreetingText(currentItem.popisBezpecnostnehoOkna, 16)
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-
-        ConfirmationCheckbox(
-            checked = checkClicked,
-            onCheckedChange = { checkClicked = it }
-        )
-
-        CustomButton("Dalsia otazka", onClick = {navController.navigate("courses")}, enabled = checkClicked)
-        CustomButton("Otazku spat", onClick = {navController.navigate("courses")})
-
-
-
-
-    }
-}*/
-
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BezpecnostnaKontrola(navController: NavController) {
@@ -106,8 +56,8 @@ fun BezpecnostnaKontrola(navController: NavController) {
         val resourceName = "bzpkontrola${currentItem.id}"
         context.resources.getIdentifier(resourceName, "drawable", context.packageName)
     }
-    val scrollState = rememberScrollState()
-
+    Scaffold(containerColor = Color(0xFF1BB2C7)) {
+        val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -115,14 +65,14 @@ fun BezpecnostnaKontrola(navController: NavController) {
             .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Nadpis
+
         GreetingText(
             stringResource(id = R.string.BezpecnostnaKontrola),
             40,
             bezPozadia = true,
             normalnyStylPisma = false,
             hrubePismo = true,
-            rgbTextu = 0xFF1BB2C7
+            rgbTextu = 0xFFFFFFFF
         )
 
         GreetingText(currentItem.nadpisBezpecnostnehoOkna, 20, bezPozadia = true, hrubePismo = true)
@@ -133,7 +83,7 @@ fun BezpecnostnaKontrola(navController: NavController) {
 
         GreetingText(currentItem.popisBezpecnostnehoOkna, 16)
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         // Checkbox „Rozumiem“
         ConfirmationCheckbox(
@@ -141,33 +91,37 @@ fun BezpecnostnaKontrola(navController: NavController) {
             onCheckedChange = { checkClicked = it }
         )
 
-    Spacer(modifier = Modifier.height(10.dp))
-
-    // Tlačidlá Späť a Ďalej
-
+    Spacer(modifier = Modifier.height(5.dp))
         CustomButton(
-            text = "Späť",
-            enabled = currentIndex > 0,
+            text = stringResource(id = R.string.SpatBozp),
             onClick = {
-                currentIndex--
-                checkClicked = false
+                if (currentIndex <= 0) {
+                    navController.navigate("home")
+                } else {
+                    currentIndex--
+                    checkClicked = false
+                }
             }
         )
 
         CustomButton(
-            text = if (currentIndex < prvky.size - 1) "Ďalšia otázka" else "Dokončiť",
+            text = if (currentIndex < prvky.size - 1) {
+                stringResource(id = R.string.DalsiaOtazkaBOZP)
+            } else {
+                stringResource(id = R.string.Dokonci)
+            },
             enabled = checkClicked,
             onClick = {
                 if (currentIndex < prvky.size - 1) {
                     currentIndex++
                     checkClicked = false
                 } else {
-                    // Môžeš ísť na hlavnú stránku alebo inam
-                    navController.navigate("home")
+                    navController.navigate("pripravenyNaOdlet")
                 }
             }
         )
 
+    }
     }
 }
 
@@ -178,11 +132,13 @@ fun GreetingImage(image: Painter) {
     Image(
         painter = image,
         contentDescription = null,
-        //ked mam citacku
-        //contentScale = ContentScale.FillBounds,
+
         contentScale = ContentScale.Crop,
-        modifier = Modifier.fillMaxWidth().
-        padding(bottom = 5.dp).padding(top = 5.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(15.dp)
+            .padding(bottom = 5.dp)
+            .padding(top = 5.dp),
 
     )
 }
@@ -210,11 +166,12 @@ fun GreetingText(name: String, velkost: Int, bezPozadia: Boolean = true ,rgbText
     }
     Text(
         text = name,
-        modifier = modifier.
-        fillMaxWidth().
+        modifier = modifier
+            .fillMaxWidth()
+            .
             //padding((velkost/3).dp).
-        background(pozadie).
-        padding(10.dp),
+            background(pozadie)
+            .padding(10.dp),
         fontSize = velkost.sp,
         lineHeight = velkost.sp,
         textAlign = TextAlign.Center,
@@ -232,10 +189,10 @@ fun CustomButton(text: String, onClick: () -> Unit, enabled: Boolean = true,modi
 
         onClick = onClick,
         enabled = enabled,
-        modifier = modifier.
-        fillMaxWidth().
-        height(80.dp).
-        padding(10.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .padding(10.dp),
         shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(Color.White),
         border = BorderStroke(2.dp, Color.Black)
@@ -250,7 +207,7 @@ fun CustomButton(text: String, onClick: () -> Unit, enabled: Boolean = true,modi
 fun ConfirmationCheckbox(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
-    text: String = "Rozumiem"
+    text: String = stringResource(id = R.string.RozumiemBoyp),
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,

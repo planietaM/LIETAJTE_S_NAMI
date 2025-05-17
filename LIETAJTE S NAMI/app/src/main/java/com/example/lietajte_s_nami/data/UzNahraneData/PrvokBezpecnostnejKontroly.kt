@@ -1,6 +1,4 @@
-package com.example.lietajte_s_nami.data
-
-import androidx.compose.ui.graphics.Paint
+package com.example.lietajte_s_nami.data.UzNahraneData
 
 data class PrvokBezpecnostnejKontroly (
     val id: Int,

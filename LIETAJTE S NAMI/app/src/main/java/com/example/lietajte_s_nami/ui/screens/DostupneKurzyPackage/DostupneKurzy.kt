@@ -1,4 +1,4 @@
-package com.example.lietajte_s_nami.screens.DostupneKurzyPackage
+package com.example.lietajte_s_nami.ui.screens.DostupneKurzyPackage
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.lietajte_s_nami.R
-import com.example.lietajte_s_nami.data.Kurzy
-import com.example.lietajte_s_nami.data.Kurz
+import com.example.lietajte_s_nami.data.UzNahraneData.Kurzy
+import com.example.lietajte_s_nami.data.UzNahraneData.Kurz
 
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -59,6 +59,7 @@ fun DostupneKurzy(navController: NavController) {
                 )
             }
         }
+        Spacer(modifier = Modifier.height(15.dp))
     }
 }
 
@@ -98,7 +99,7 @@ fun KurzCard(kurz: Kurz, onClick: () -> Unit, modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Typ: ${kurz.typKurzu}",
+                        text = kurz.typKurzu ,
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Text(
@@ -121,7 +122,7 @@ fun KurzCard(kurz: Kurz, onClick: () -> Unit, modifier: Modifier = Modifier) {
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text(
-                    text = "Viac informácií",
+                    text = stringResource(id = R.string.ViacInformacii),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold
                 )

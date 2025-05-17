@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.lietajte_s_nami.navigation.AppNavigator
+import com.example.lietajte_s_nami.ui.navigation.AppNavigator
 
 import com.example.lietajte_s_nami.ui.theme.LIETAJTE_S_NAMITheme
 
